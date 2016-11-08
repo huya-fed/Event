@@ -52,3 +52,18 @@ if (loaded) {
     // do something
 }
 ```
+
+作为混入类使用也是没有问题的
+
+``` javascript
+var TT = {}
+
+extend(TT, new Event())
+
+TT.on('xx', function(){
+    console.log(1)
+})
+
+TT.emit('xx')
+```
+
