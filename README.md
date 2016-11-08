@@ -39,3 +39,16 @@ evt.on('xx', function(a){
     console.log(a)    // => 666
 }, true)
 ```
+
+可以借此判断事件是否触发过
+```javascript
+var loaded = false
+
+evt.on('load', function(a){
+    loaded = true
+}, true)
+
+if (loaded) {
+    // do something
+}
+```
