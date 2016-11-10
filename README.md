@@ -11,6 +11,10 @@ evt.on('xx', function(a, b, c){
     console.log(a)
 })
 
+evt.one('xx', function(){
+    console.log('once')
+})
+
 evt.on('xx', listenerA)
 
 function listenerA (a, b, c){
