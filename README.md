@@ -1,5 +1,5 @@
 # Event
-自定义事件订阅发布器
+自定义事件订阅发布器 (依赖 jQuery.Callbacks)
 
 简单用法：
 
@@ -55,6 +55,14 @@ evt.on('load', function(a){
 if (loaded) {
     // do something
 }
+```
+监听所有事件。`ALL`事件是一个特殊的事件，当有任何事件触发是，它也会触发：
+```javascript
+evt.on('ALL', function(name){
+    console.log(name)
+})
+
+evt.emit('xx')    // => xx
 ```
 
 作为混入类使用也是没有问题的
