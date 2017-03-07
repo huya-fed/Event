@@ -70,7 +70,7 @@ evt.emit('xx')    // => xx
 ``` javascript
 var TT = {}
 
-extend(TT, new Event())
+Object.assign(TT, new Event())
 
 TT.on('xx', function(){
     console.log(1)
