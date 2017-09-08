@@ -24,7 +24,7 @@
             e.callbacks.add(callback)
 
             if (useCache && e.fired) {
-                e.callbacks.fireWith(this, e.data)
+                callback.apply(this, e.data)
             }
 
             return this
