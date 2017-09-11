@@ -1,6 +1,7 @@
-    // https://github.com/huya-fed/Event
-    
-    var Callbacks = $.Callbacks
+    /**
+     * Class Event
+     * https://github.com/huya-fed/Event
+     */
     
     var arr = []
     var slice = arr.slice
@@ -13,13 +14,21 @@
         return typeof s === 'string'
     }
 
+    function E () {
+        return {
+            fired: false, 
+            data: [], 
+            callbacks: new $.Callbacks()
+        }
+    }
+
     function Event () {
         var events = {}
 
         function on (name, callback, useCache) {
             if ( !isString(name) || !isFunction(callback) ) return this;
 
-            var e = events[name] || ( events[name] = {fired: false, data: null, callbacks: new Callbacks()} )
+            var e = events[name] || ( events[name] = new E() )
 
             e.callbacks.add(callback)
 
@@ -30,24 +39,18 @@
             return this
         }
 
-        function emit (name, dataA, dataB, dataC) {
+        function emit (name) {
             if ( !isString(name) ) return this;
 
-            var e = events[name] || ( events[name] = {fired: false, data: null, callbacks: new Callbacks()} )
+            var e = events[name] || ( events[name] = new E() )
 
             e.fired = true
             e.data = slice.call(arguments, 1)
+            e.callbacks.fireWith(this, e.data)
 
             if (name !== 'ALL') {
-                e.callbacks.fireWith(this, e.data)
+                emit.apply( this, ['ALL'].concat( slice.call(arguments) ) )
             }
-
-            // emit('ALL')
-            var eAll = events['ALL'] || ( events['ALL'] = {fired: false, data: null, callbacks: new Callbacks()} )
-
-            eAll.fired = true
-            eAll.data = slice.call(arguments, 0) 
-            eAll.callbacks.fireWith(this, eAll.data)
 
             return this
         }
