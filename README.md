@@ -1,5 +1,5 @@
 # Event
-自定义事件订阅发布器 (依赖 jQuery.Callbacks)
+自定义事件订阅/发布器 (依赖 jQuery.Callbacks)
 
 简单用法：
 
@@ -32,7 +32,7 @@ evt.off()    // 所有（慎用）
 
 高级用法：
 
-已触发过的事件会被记录，数据也会缓存起来，之后调用 on 方法进行监听时，如果第三个参数传入true，回调将会被立即调用
+已触发过的事件会被记录，数据也会缓存起来（仅最近一次），之后调用 on 方法进行监听时，如果第三个参数传入true，回调将会被立即调用
 
 ```javascript
 var evt = new Event()
@@ -58,11 +58,11 @@ if (loaded) {
 ```
 监听所有事件。`ALL`事件是一个特殊的事件，当有任何事件触发是，它也会触发：
 ```javascript
-evt.on('ALL', function(name){
-    console.log(name)
+evt.on('ALL', function(name, data){
+    console.log(name, data)
 })
 
-evt.emit('xx')    // => xx
+evt.emit('xx', 'Hellow')    // => xx Hellow
 ```
 
 作为混入类使用也是没有问题的
