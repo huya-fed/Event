@@ -56,13 +56,13 @@ if (loaded) {
     // do something
 }
 ```
-监听所有事件。`ALL`事件是一个特殊的事件，当有任何事件触发是，它也会触发：
+监听所有事件。`ALL`事件是一个特殊的事件，当有任何事件触发时，它也会触发：
 ```javascript
 evt.on('ALL', function(name, data){
     console.log(name, data)
 })
 
-evt.emit('xx', 'Hellow')    // => xx Hellow
+evt.emit('xx', 'Hello')    // => xx Hello
 ```
 
 作为混入类使用也是没有问题的
